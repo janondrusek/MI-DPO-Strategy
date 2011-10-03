@@ -1,6 +1,7 @@
 package cz.cvut.fit.mi_dpo.strategy.traversal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cz.cvut.fit.mi_dpo.strategy.Matrix;
@@ -39,6 +40,28 @@ public abstract class Traversal {
 			sb.deleteCharAt(sb.length() - 1);
 		}
 		return sb.toString();
+	}
+
+	protected Integer getUnvisitedChildNode(Integer peeked) {
+		List<Integer> children = new ArrayList<>();
+
+		for (int child = peeked; child < getMatrix().getSize(); child++) {
+			if (isClosestChild(peeked, child)) {
+				children.add(child);
+			}
+		}
+
+		for (int child = peeked; child >= 0; child--) {
+			if (isClosestChild(peeked, child)) {
+				children.add(child);
+			}
+		}
+		Collections.sort(children);
+		return children.size() > 0 ? children.get(0) : null;
+	}
+
+	private boolean isClosestChild(Integer peeked, Integer child) {
+		return getMatrix().hasEdge(peeked, child) && !getNodesOrder().contains(child);
 	}
 
 }
