@@ -34,7 +34,7 @@ public class StrategyRunner {
 		}
 	}
 
-	private static void traverse(Matrix matrix, String strategy) throws UnsupportedOperationException {
+	private static void traverse(Matrix matrix, String strategy) {
 		Traversal result = null;
 		if (strategy.equals(DFS)) {
 			result = new DFSTraversal(matrix);
