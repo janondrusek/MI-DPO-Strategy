@@ -30,7 +30,7 @@ public abstract class Traversal {
 
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (Integer node : getNodesOrder()) {
 			sb.append(node);
 			sb.append(" ");
