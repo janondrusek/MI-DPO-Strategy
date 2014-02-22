@@ -1,7 +1,7 @@
 package cz.cvut.fit.mi_dpo.strategy.traversal;
 
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 import cz.cvut.fit.mi_dpo.strategy.Matrix;
 
@@ -12,13 +12,12 @@ public class BFSTraversal extends Traversal {
 	}
 
 	@Override
-	protected void traverse() {
-		Queue<Integer> queue = new LinkedList<>();
+	protected Deque<Integer> newDeque() {
+		return new LinkedList<>();
+	}
 
-		Integer root = 0;
-		queue.add(root);
-		getNodesOrder().add(root);
-
+	@Override
+	protected void doTraverse(Deque<Integer> queue) {
 		while (!queue.isEmpty()) {
 			Integer queued = queue.remove();
 			Integer child = null;

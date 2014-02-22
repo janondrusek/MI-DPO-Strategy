@@ -2,6 +2,7 @@ package cz.cvut.fit.mi_dpo.strategy.traversal;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.List;
 
 import cz.cvut.fit.mi_dpo.strategy.Matrix;
@@ -18,7 +19,18 @@ public abstract class Traversal {
 		traverse();
 	}
 
-	abstract protected void traverse();
+	protected final void traverse() {
+		Deque<Integer> queue = newDeque();
+		Integer root = 0;
+		queue.add(root);
+		getNodesOrder().add(root);
+
+		doTraverse(queue);
+	}
+
+	abstract protected Deque<Integer> newDeque();
+
+	abstract protected void doTraverse(Deque<Integer> queue);
 
 	protected Matrix getMatrix() {
 		return matrix;

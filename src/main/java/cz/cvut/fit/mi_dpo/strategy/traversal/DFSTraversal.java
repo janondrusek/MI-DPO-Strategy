@@ -1,6 +1,7 @@
 package cz.cvut.fit.mi_dpo.strategy.traversal;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import cz.cvut.fit.mi_dpo.strategy.Matrix;
 
@@ -11,21 +12,20 @@ public class DFSTraversal extends Traversal {
 	}
 
 	@Override
-	protected void traverse() {
-		Stack<Integer> stack = new Stack<>();
+	protected Deque<Integer> newDeque() {
+		return new ArrayDeque<>();
+	}
 
-		Integer root = 0;
-		stack.push(root);
-
-		getNodesOrder().add(root);
-		while (!stack.isEmpty()) {
-			Integer peeked = stack.peek();
+	@Override
+	protected void doTraverse(Deque<Integer> queue) {
+		while (!queue.isEmpty()) {
+			Integer peeked = queue.peek();
 			Integer child = getUnvisitedChildNode(peeked);
 			if (child != null) {
 				getNodesOrder().add(child);
-				stack.push(child);
+				queue.push(child);
 			} else {
-				stack.pop();
+				queue.pop();
 			}
 		}
 	}

@@ -14,7 +14,7 @@ public class Matrix {
 		return size;
 	}
 
-	public boolean hasEdge(int row, int column) throws ArrayIndexOutOfBoundsException {
+	public boolean hasEdge(int row, int column) {
 		return matrix[row][column];
 	}
 
